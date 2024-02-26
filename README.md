@@ -258,7 +258,7 @@ Code:
 https://codio.com/xblake/sandbox 
 
 User Manual: 
-
+https://github.com/xavierblake24/GUIDE.md/blob/main/README.md
 References: 
 
 Malik, D. S. (2017). C++ Programming: From Problem Analysis to Program Design (8th ed.). Cengage Learning. January 13, 2024, https://www.cengage.com/c/c-programming-8e-malik/9781337102087/ 
