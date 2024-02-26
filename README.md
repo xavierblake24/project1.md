@@ -51,157 +51,98 @@ End
 
 Pseudocode: 
 
-#include <iostream> 
-
-#include <fstream> 
+#include <string> 
 
 #include <iomanip> 
 
-#include <map> 
+#include <fstream> 
 
  
 
-struct IngredientEntry { 
-
-    std::string ingredient; 
-
-    double quantity; 
-
-    std::string date; 
-
-}; 
+Using namespace std: 
 
  
 
-std::map<std::string, double> categoryTotals; 
+Int main () 
+
+{ 
+
+      int flour, milk, eggs, sugar 
+
+      double items, payment, totalCost: 
+
+      const int flourcost= 10 , eggscost=15 milkcost=20 , sugarcost=25 : 
+
+      ofstream outputFile ( “bakingitems.txt “ , ios : : ) ; 
+
+  
+
+     cout<<”How many bags of flour were purchased? “; 
+
+     cin>>flour 
+
+     cout<<”How many milk jugs were purchased? “; 
+
+     cin>>milk 
+
+     cout<<”How many cartons of eggs were purchased? “; 
+
+     cin>> eggs 
+
+     cout<<”How many bags of sugar were purchased? “; 
+
+     cin>>sugar 
 
  
 
-void saveIngredient(const IngredientEntry& entry) { 
+      totalCost=( eggs*eggscost) + ( milk*milkcost ) + ( sugar*sugarcost) + ( flour*flourcost) ; 
 
-    std::ofstream file("ingredient_data.txt", std::ios::app); 
+   
+
+      cout<<”Total cost: $”<< ( eggs*eggscost) + ( milk*milkcost ) + ( sugar*sugarcost) + ( flour*flourcost)<< 
+
+      cout<<”Enter payment: $” ; 
+
+      cin>>Payment ; 
 
  
 
-    if (file.is_open()) { 
+       if  (payment  !=  totalcost ) 
 
-        file << entry.ingredient << " " << entry.quantity << " " << entry.date << std::endl; 
+              cout<<”You still owe:  $”<<fixed<<setprecision(2)<<(payment-totalCost)<<endl 
 
-        file.close(); 
+        else 
 
-    } else { 
+              cout<<”Have a great day!”<<endl 
 
-        std::cerr << "Error: Unable to save ingredient data." << std::endl; 
+         
 
-    } 
+        outputFile<<”Baking Items”<<endl ; 
+
+        outputFile<<”milk : “<<milk<<endl; 
+
+        outputFile<<flour : “<<flour<<endl 
+
+        outputFile<<eggs : “<<eggs<<endl 
+
+        outputFile<<sugar : “sugar<<endl 
+
+        outputFile<<”Total Cost :  $”<<totalCost<<endl 
+
+        outputFile<<Payment : $”<<payment<<endl 
+
+ 
+
+        outputFile.close () ; 
+
+ 
+
+        return 0: 
 
 } 
 
  
 
-void categorizeExpense(const IngredientEntry& entry) { 
-
-    if (entry.quantity >= 50 && entry.quantity <= 200) { 
-
-        categoryTotals[entry.ingredient] += entry.quantity; 
-
-    } 
-
-} 
-
- 
-
-void generateSummaryReport() { 
-
-    std::cout << "\nSummary Report\n"; 
-
-    std::cout << std::setw(15) << "Ingredient" << std::setw(15) << "Total Quantity\n"; 
-
-    for (const auto& pair : categoryTotals) { 
-
-        std::cout << std::setw(15) << pair.first << std::setw(15) << pair.second << std::endl; 
-
-    } 
-
-} 
-
- 
-
-int main() { 
-
-    int choice; 
-
-    IngredientEntry newEntry; 
-
- 
-
-    do { 
-
-        std::cout << "\n1. Input new ingredient\n2. View summary report\n3. Exit\nEnter your choice: "; 
-
-        std::cin >> choice; 
-
- 
-
-        switch (choice) { 
-
-            case 1: 
-
-                std::cout << "\nEnter ingredient name (name): "; 
-
-                std::cin >> newEntry.ingredient; 
-
- 
-
-                std::cout << "Enter quantity ($50-$200): "; 
-
-                std::cin >> newEntry.quantity; 
-
- 
-
-                std::cout << "Enter date (MM/DD/YYYY): "; 
-
-                std::cin >> newEntry.date; 
-
- 
-
-                saveIngredient(newEntry); 
-
-                categorizeExpense(newEntry); 
-
-                break; 
-
- 
-
-            case 2: 
-
-                generateSummaryReport(); 
-
-                break; 
-
- 
-
-            case 3: 
-
-                std::cout << "\nExiting program.\n"; 
-
-                break; 
-
- 
-
-            default: 
-
-                std::cerr << "\nError: Invalid choice. Please enter a valid option.\n"; 
-
-        } 
-
-    } while (choice != 3); 
-
- 
-
-    return 0; 
-
-} 
 
  
 
