@@ -50,96 +50,99 @@ End
  
 
 Pseudocode: 
+#include <iostream>
+#include <fstream>
+#include <iomanip>
 
-#include <string> 
+using namespace std;
 
-#include <iomanip> 
+// Function to input quantities of baking items
+void inputQuantities(int& flour, int& milk, int& eggs, int& sugar) {
+    cout << "How many bags of flour were purchased? ";
+    cin >> flour;
+    cout << "How many milk jugs were purchased? ";
+    cin >> milk;
+    cout << "How many cartons of eggs were purchased? ";
+    cin >> eggs;
+    cout << "How many bags of sugar were purchased? ";
+    cin >> sugar;
+}
 
-#include <fstream> 
+// Function to calculate total cost
+double calculateTotalCost(int flour, int milk, int eggs, int sugar) {
+    const int flourcost = 10, eggscost = 15, milkcost = 20, sugarcost = 25;
+    return (eggs * eggscost) + (milk * milkcost) + (sugar * sugarcost) + (flour * flourcost);
+}
 
- 
+// Function to handle payment
+void handlePayment(double totalCost) {
+    double payment;
+    cout << "Total cost: $" << totalCost << endl;
+    cout << "Enter payment: $";
+    cin >> payment;
 
-Using namespace std: 
+    if (payment != totalCost)
+        cout << "You still owe: $" << fixed << setprecision(2) << (totalCost - payment) << endl;
+    else
+        cout << "Have a great day!" << endl;
+}
 
- 
+// Function to write to file
+void writeToFile(int flour, int milk, int eggs, int sugar, double totalCost, double payment) {
+    ofstream outputFile("bakingitems.txt", ios::out);
+    outputFile << "Baking Items" << endl;
+    outputFile << "Milk: " << milk << endl;
+    outputFile << "Flour: " << flour << endl;
+    outputFile << "Eggs: " << eggs << endl;
+    outputFile << "Sugar: " << sugar << endl;
+    outputFile << "Total Cost: $" << totalCost << endl;
+    outputFile << "Payment: $" << payment << endl;
+    outputFile.close();
+}
 
-Int main () 
+int main() {
+    int choice;
+    int flour, milk, eggs, sugar;
+    double totalCost, payment;
 
-{ 
+    do {
+        cout << "Menu:\n";
+        cout << "1. Input quantities of baking items\n";
+        cout << "2. Calculate total cost\n";
+        cout << "3. Handle payment\n";
+        cout << "4. Write to file\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-      int flour, milk, eggs, sugar 
+        switch(choice) {
+            case 1:
+                inputQuantities(flour, milk, eggs, sugar);
+                break;
+            case 2:
+                totalCost = calculateTotalCost(flour, milk, eggs, sugar);
+                cout << "Total cost: $" << totalCost << endl;
+                break;
+            case 3:
+                handlePayment(totalCost);
+                break;
+            case 4:
+                writeToFile(flour, milk, eggs, sugar, totalCost, payment);
+                cout << "Data written to file.\n";
+                break;
+            case 5:
+                cout << "Exiting program.\n";
+                break;
+            default:
+                cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 5);
 
-      double items, payment, totalCost: 
+    return 0;
+}
 
-      const int flourcost= 10 , eggscost=15 milkcost=20 , sugarcost=25 : 
 
-      ofstream outputFile ( “bakingitems.txt “ , ios : : ) ; 
 
-  
-
-     cout<<”How many bags of flour were purchased? “; 
-
-     cin>>flour 
-
-     cout<<”How many milk jugs were purchased? “; 
-
-     cin>>milk 
-
-     cout<<”How many cartons of eggs were purchased? “; 
-
-     cin>> eggs 
-
-     cout<<”How many bags of sugar were purchased? “; 
-
-     cin>>sugar 
-
- 
-
-      totalCost=( eggs*eggscost) + ( milk*milkcost ) + ( sugar*sugarcost) + ( flour*flourcost) ; 
-
-   
-
-      cout<<”Total cost: $”<< ( eggs*eggscost) + ( milk*milkcost ) + ( sugar*sugarcost) + ( flour*flourcost)<< 
-
-      cout<<”Enter payment: $” ; 
-
-      cin>>Payment ; 
-
- 
-
-       if  (payment  !=  totalcost ) 
-
-              cout<<”You still owe:  $”<<fixed<<setprecision(2)<<(payment-totalCost)<<endl 
-
-        else 
-
-              cout<<”Have a great day!”<<endl 
-
-         
-
-        outputFile<<”Baking Items”<<endl ; 
-
-        outputFile<<”milk : “<<milk<<endl; 
-
-        outputFile<<flour : “<<flour<<endl 
-
-        outputFile<<eggs : “<<eggs<<endl 
-
-        outputFile<<sugar : “sugar<<endl 
-
-        outputFile<<”Total Cost :  $”<<totalCost<<endl 
-
-        outputFile<<Payment : $”<<payment<<endl 
-
- 
-
-        outputFile.close () ; 
-
- 
-
-        return 0: 
-
-} 
 
  
 
